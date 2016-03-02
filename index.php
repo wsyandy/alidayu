@@ -1,36 +1,26 @@
 <?php
-/**
- * 阿里大鱼API接口（短信接口）范例
- *
- * @author Flc <2016-02-18 23:18:10>
- * @link http://flc.ren 
- * @link https://code.csdn.net/flc1125/alidayu
- */
-header ("Content-Type:text/html; charset=UTF-8");
+// +----------------------------------------------------------------------
+// | ThinkPHP [ WE CAN DO IT JUST THINK ]
+// +----------------------------------------------------------------------
+// | Copyright (c) 2006-2014 http://thinkphp.cn All rights reserved.
+// +----------------------------------------------------------------------
+// | Licensed ( http://www.apache.org/licenses/LICENSE-2.0 )
+// +----------------------------------------------------------------------
+// | Author: liu21st <liu21st@gmail.com>
+// +----------------------------------------------------------------------
 
-define('ROOT_PATH', __DIR__); // 定义根目录常量
-date_default_timezone_set('PRC'); // 设置系统时区
+// 应用入口文件
 
-require_once ROOT_PATH . '/vendor/autoload.php';
+// 检测PHP环境
+if(version_compare(PHP_VERSION,'5.3.0','<'))  die('require PHP > 5.3.0 !');
 
-use Alidayu\AlidayuClient as Client;
-use Alidayu\Request\SmsNumSend;
+// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
+define('APP_DEBUG',True);
 
-$client  = new Client;
-$request = new SmsNumSend;
+// 定义应用目录
+define('APP_PATH','./Application/');
 
-// 短信内容参数
-$smsParams = [
-    'code'    => randString(),
-    'product' => '测试的'
-];
+// 引入ThinkPHP入口文件
+require './ThinkPHP/ThinkPHP.php';
 
-// 设置请求参数
-$req = $request->setSmsTemplateCode('SMS_5053601')
-    ->setRecNum('13312341234')
-    ->setSmsParam(json_encode($smsParams))
-    ->setSmsFreeSignName('活动验证')
-    ->setSmsType('normal')
-    ->setExtend('demo');
-
-print_r($client->execute($req));
+// 亲^_^ 后面不需要任何代码了 就是如此简单
